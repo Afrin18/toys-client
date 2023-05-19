@@ -1,8 +1,18 @@
 import React from 'react';
 import logo from '../../../public/logo-design-for-kids-toys-2BHCPD2.jpg';
 import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+    console.log(user);
+    const handleLogout = () =>{
+        logOut()
+        .then(result => {})
+        .catch(error => console.error(error))
+    }
+
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/allToys'>All Toys</Link></li>
@@ -34,6 +44,7 @@ const Navbar = () => {
                 <Link to='/login'>
                     <button className="btn btn-ghost">Login</button>
                 </Link>
+                {user && <span>Welcome {user.email} <button className="btn btn-ghost" onClick={handleLogout}>Log Out</button></span>}
                 <div className="avatar">
                     <div className="w-10 rounded-full">
                         <img src="" />

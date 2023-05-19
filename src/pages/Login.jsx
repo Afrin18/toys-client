@@ -19,6 +19,7 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
+            form.reset();
         })
         .catch(error => console.log(error))
 
@@ -52,7 +53,7 @@ const Login = () => {
                                 <input className='btn btn-primary' type="submit" value="Login" />
                             </div>
                         </form>
-                        <p className='font-semibold text-center'>New to Toys Shop? <Link className='font-semibold text-orange-500' to='/signUp'>Sign Up</Link></p>
+                        <p className='text-center'><small>New to Toys Shop? <Link className='font-semibold text-orange-500' to='/signUp'>Sign Up</Link></small></p>
                     </div>
                 </div>
             </div>

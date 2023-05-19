@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 
 const SignUp = () => {
 
     const {createUser} = useContext(AuthContext);
+    const [error, setError] = useState('');
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -17,10 +18,16 @@ const SignUp = () => {
         const photoURL = form.photoURL.value;
         console.log(name, email, password, photoURL);
 
+        if(password.length < 6){
+            setError('password must be 6 characters or longer')
+            return
+        }
+
         createUser(email, password)
         .then(result => {
             const user = result.user;
             console.log(user);
+            form.reset();
         })
         .catch(error => console.log(error))
     }
@@ -62,7 +69,8 @@ const SignUp = () => {
                                 <input className='btn btn-primary' type="submit" value="Sign Up" />
                             </div>
                         </form>
-                        <p className='font-semibold text-center'>Already have an account? <Link className='font-semibold text-orange-500' to='/login'>Login</Link></p>
+                        <p className=' text-center'><small>Already have an account? <Link className='font-semibold text-orange-500' to='/login'>Login</Link></small></p>
+                        <p className='text-red-500'>{error}</p>
                     </div>
                 </div>
             </div>
