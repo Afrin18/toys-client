@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const navItems = <>
-    <li><Link to='/'>Home</Link></li>
+        <li><Link to='/'>Home</Link></li>
         <li><Link to='/allToys'>All Toys</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
+        <li><Link to='/signUp'>Sign Up</Link></li>
+        {/* <li><Link to='/addToy'>Add a Toy</Link></li> */}
     </>
     return (
         <div className="navbar bg-base-300 mb-6">
@@ -20,16 +22,23 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <p className="">
-                    <img className='h-10 w-25' src={logo} alt=""/>
-                    <span className='text-3xl font-bold'>Toys Shop</span></p>
+                    <img className='h-10 w-25' src={logo} alt="" />
+                    <span className='text-3xl text-green-500 font-bold'>Toys Shop</span></p>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {navItems}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Get started</a>
+            <div className="navbar-end gap-2">
+                <Link to='/login'>
+                    <button className="btn btn-ghost">Login</button>
+                </Link>
+                <div className="avatar">
+                    <div className="w-10 rounded-full">
+                        <img src="" />
+                    </div>
+                </div>
             </div>
         </div>
     );

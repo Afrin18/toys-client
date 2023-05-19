@@ -1,8 +1,8 @@
 import React from 'react';
-import img1 from "../assets/cabbage-patch-kids.webp";
-import img2 from "../assets/collection-children-toys-kid-development-entertainment-isolated-white-background-bundle-tools-kid-amusement-play-bright-colored-vector-icons_87946-4696.avif";
-import img3 from "../assets/toys-pictures_csp14363980.webp";
-import img4 from "../assets/Reviewed.com-RvEW-27182-octopus-plushie.webp";
+import img1 from "../assets/istockphoto-182166193-612x612.jpg";
+import img2 from "../assets/dinosaurs-toy-animals-jurassic-colorful-plastic.jpg";
+import img3 from "../assets/istockphoto-1341656566-612x612.jpg";
+import img4 from "../assets/360_F_496098888_BRnh3qV8isKq31anWySwR0SJqTMpO256.jpg";
 
 const Banner = () => {
     return (
