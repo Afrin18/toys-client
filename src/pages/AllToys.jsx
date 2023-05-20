@@ -5,14 +5,14 @@ import ToysCard from "./ToysCard";
 
 
 const AllToys = () => {
-    const allToys = useLoaderData();
-    // const [allToys, setAllToys] = useState([]);
+    // const allToys = useLoaderData();
+    const [allToys, setAllToys] = useState([]);
 
-    // useEffect( () => {
-    //     fetch('http://localhost:5000/toys')
-    //     .then(res => res.json())
-    //     .then(data => setAllToys(data))
-    // } , [])
+    useEffect( () => {
+        fetch('http://localhost:5000/toys')
+        .then(res => res.json())
+        .then(data => setAllToys(data))
+    } , [])
 
     return (
         <div className='mt-10'>
@@ -20,7 +20,7 @@ const AllToys = () => {
             <div>
                 {
                     allToys.map(allToy => <ToysCard
-                        key={allToys._id}
+                        key={allToy._id}
                         allToy={allToy}
                     ></ToysCard>)
                 }
