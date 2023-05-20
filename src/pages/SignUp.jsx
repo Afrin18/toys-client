@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const {createUser} = useContext(AuthContext);
     const [error, setError] = useState('');
@@ -28,6 +30,7 @@ const SignUp = () => {
             const user = result.user;
             console.log(user);
             form.reset();
+            navigate('/');
         })
         .catch(error => console.log(error))
     }

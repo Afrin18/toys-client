@@ -5,20 +5,24 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-    const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     console.log(user);
-    const handleLogout = () =>{
+    const handleLogout = () => {
         logOut()
-        .then(result => {})
-        .catch(error => console.error(error))
+            .then(result => {
+                const user = result.user;
+            })
+            .catch(error => console.error(error))
     }
 
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/allToys'>All Toys</Link></li>
+        {user && <li><Link to='/myToys'>My Toys</Link></li>}
+        {user && <li><Link to='/addToy'>Add a Toy</Link></li>}
         <li><Link to='/blogs'>Blogs</Link></li>
         <li><Link to='/signUp'>Sign Up</Link></li>
-        {/* <li><Link to='/addToy'>Add a Toy</Link></li> */}
+
     </>
     return (
         <div className="navbar bg-base-300 mb-6">
@@ -44,12 +48,22 @@ const Navbar = () => {
                 <Link to='/login'>
                     <button className="btn btn-ghost">Login</button>
                 </Link>
-                {user && <span>Welcome {user.email} <button className="btn btn-ghost" onClick={handleLogout}>Log Out</button></span>}
-                <div className="avatar">
-                    <div className="w-10 rounded-full">
-                        <img src="" />
+                {user && <button className="btn btn-ghost" onClick={handleLogout}>Log Out</button>}
+                {/* {user && <span>{user.displayName} <button className="btn btn-ghost" onClick={handleLogout}>Log Out</button></span>} */}
+
+                {user && <div className="tooltip tooltip-left" data-tip={user.displayName}>
+                    {/* <button className="btn">Hover me</button> */}
+                    <div className="avatar">
+                        <div className="w-10 rounded-full">
+                            <img src={user.photoURL} />
+                        </div>
                     </div>
-                </div>
+                </div>}
+                {/* <div className="avatar">
+                    <div className="w-10 rounded-full">
+                        <img src={user.photoURL} />
+                    </div>
+                </div> */}
             </div>
         </div>
     );

@@ -1,12 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import app from "../firebase/firebase.config";
+import { FaGoogle } from 'react-icons/fa';
+
 
 const Login = () => {
 
     const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth(app);
 
+    const handleGoogleSignIn = () => {
+        signInWithPopup(auth, provider)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+            navigate('/');
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
     
     const handleLogin = event => {
         event.preventDefault();
@@ -20,6 +40,7 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             form.reset();
+            navigate('/');
         })
         .catch(error => console.log(error))
 
@@ -52,6 +73,7 @@ const Login = () => {
                             <div className="form-control mt-6">
                                 <input className='btn btn-primary' type="submit" value="Login" />
                             </div>
+                            <button className="w-full gap-2 mt-2 btn btn-outline btn-success" onClick={handleGoogleSignIn}><FaGoogle />Sign in with Google</button>
                         </form>
                         <p className='text-center'><small>New to Toys Shop? <Link className='font-semibold text-orange-500' to='/signUp'>Sign Up</Link></small></p>
                     </div>
