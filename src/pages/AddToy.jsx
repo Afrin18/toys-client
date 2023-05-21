@@ -1,10 +1,29 @@
 import React from 'react';
 
 const AddToy = () => {
+
+    const handleAddToy = event =>{
+        event.preventDefault();
+
+        const form = event.target;
+        const image = form.image.value;
+        const toy_name = form.toy_name.value;
+        const seller_name = form.seller_name.value;
+        const seller_email = form.seller_email.value;
+        const category_name = form.category_name.value;
+        const price = form.price.value;
+        const rating = form.rating.value;
+        const available_quan = form.available_quan.value;
+        const description = form.description.value;
+
+        const newToy = {image, toy_name, seller_name, seller_email, category_name, price, rating, available_quan, description};
+        console.log(newToy);
+    }
+
     return (
         <div>
             <h2 className='text-4xl font-bold text-center text-green-600 mb-8'>Add A Toy</h2>
-            <form className='px-8'>
+            <form onSubmit={handleAddToy} className='px-8'>
                 <div className='md:flex mb-6'>
                     <div className="form-control md:w-1/2">
                         <label className="label">
