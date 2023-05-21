@@ -16,7 +16,7 @@ const AllToys = () => {
 
     return (
         <div className='mt-10'>
-            <h2 className='text-4xl text-center font-bold text-green-500'>...All Toys...</h2>
+            <h2 className='text-4xl text-center font-bold text-green-500'>All Toys</h2>
             <div>
                 {
                     allToys.map(allToy => <ToysCard
