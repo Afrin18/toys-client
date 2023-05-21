@@ -12,7 +12,7 @@ const Login = () => {
     const {signIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app);
 

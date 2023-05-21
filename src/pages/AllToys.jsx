@@ -1,29 +1,20 @@
 import React from 'react';
-import { useEffect, useState } from "react";
 import { useLoaderData } from 'react-router-dom';
-import ToysCard from "./ToysCard";
-
+import ToyCard from './ToyCard';
 
 const AllToys = () => {
-    // const allToys = useLoaderData();
-    const [allToys, setAllToys] = useState([]);
-
-    useEffect( () => {
-        fetch('http://localhost:5000/toys')
-        .then(res => res.json())
-        .then(data => setAllToys(data))
-    } , [])
+    const toys = useLoaderData();
 
     return (
-        <div className='mt-10'>
-            <h2 className='text-4xl text-center font-bold text-green-500'>All Toys</h2>
-            <div>
+        <div className=''>
+            <h2 className='text-4xl font-bold text-center text-green-600 mb-8'>All toys</h2>
+            <div className='grid grid-cols-2'>
                 {
-                    allToys.map(allToy => <ToysCard
-                        key={allToy._id}
-                        allToy={allToy}
-                    ></ToysCard>)
-                }
+                toys.map(toy => <ToyCard
+                key={toy._id}
+                toy={toy}
+                ></ToyCard>)
+            }
             </div>
         </div>
     );

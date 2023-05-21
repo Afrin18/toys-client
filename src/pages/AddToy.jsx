@@ -1,8 +1,12 @@
 import React from 'react';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';;
+
 
 const AddToy = () => {
 
-    const handleAddToy = event =>{
+    const navigate = useNavigate();
+    const handleAddToy = event => {
         event.preventDefault();
 
         const form = event.target;
@@ -16,8 +20,31 @@ const AddToy = () => {
         const available_quan = form.available_quan.value;
         const description = form.description.value;
 
-        const newToy = {image, toy_name, seller_name, seller_email, category_name, price, rating, available_quan, description};
+        const newToy = { image, toy_name, seller_name, seller_email, category_name, price, rating, available_quan, description };
         console.log(newToy);
+
+        // send data to sever
+        fetch('http://localhost:5000/toys', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newToy)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Toy Added Successfully',
+                        icon: 'Success',
+                        confirmButtonText: 'Cool'
+                    })
+                    form.reset();
+                    navigate('/myToys');
+                }
+            })
     }
 
     return (
@@ -98,16 +125,16 @@ const AddToy = () => {
                     </div>
                 </div>
                 <div>
-                <div className="form-control w-full mb-6">
-                    <label className="label">
-                        <span className="label-text">Detail Description</span>
-                    </label>
-                    <label className="input-group">
-                        <input type="text" name="description" placeholder="Detail Description" className="input input-bordered w-full" />
-                    </label>
+                    <div className="form-control w-full mb-6">
+                        <label className="label">
+                            <span className="label-text">Detail Description</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="description" placeholder="Detail Description" className="input input-bordered w-full" />
+                        </label>
+                    </div>
                 </div>
-                </div>
-                <input type="submit" value="Add A Toy" className='btn btn-block'/>
+                <input type="submit" value="Add A Toy" className='btn btn-block' />
             </form>
         </div >
     );
